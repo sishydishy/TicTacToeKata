@@ -287,4 +287,7 @@ __pycache__/
 *.odx.cs
 *.xsd.cs
 
+# OS generated files 
+.DS_Store
+.DS_Store?
 
