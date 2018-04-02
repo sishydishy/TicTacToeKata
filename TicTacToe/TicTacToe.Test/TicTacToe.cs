@@ -3,7 +3,7 @@ using Xunit;
 
 namespace TicTacToe.Test
 {
-    public class UnitTest1
+    public class TicTacToe
     {
         [Fact]
         public void Test1()
