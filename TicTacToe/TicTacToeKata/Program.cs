@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Runtime.InteropServices;
 
 namespace TicTacToeKata
 {
@@ -10,7 +11,10 @@ namespace TicTacToeKata
             
             Console.WriteLine("Here's the current board:");
             
-        
+            var board = new GameBoard();
+            Console.WriteLine((char)board.Board[0]);
+            
+            //board.ShouldRender();
 
         }
     }
