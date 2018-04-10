@@ -8,6 +8,13 @@ namespace TicTacToe.Test
 {
     public class GameBoardShould
     {
+        private readonly GameBoard _gameBoard;
+
+        public GameBoardShould()
+        {
+            _gameBoard = new GameBoard();
+        }
+
         [Fact]
         public void CreateEmptyGameBoard()
         {
@@ -18,14 +25,12 @@ namespace TicTacToe.Test
                 Symbol.Empty, Symbol.Empty, Symbol.Empty
             };
 
-            var gameBoard = new GameBoard();
-            Assert.Equal(expected, gameBoard.Board);
+            Assert.Equal(expected, _gameBoard.Board);
         }
 
         [Fact]
         public void ReturnPosiiton()
         {
-            var gameBoard = new GameBoard();
             var expected = new Point
             {
                 X = 0,
@@ -33,7 +38,7 @@ namespace TicTacToe.Test
             };
 
 
-            var resultPosition = gameBoard.Position(0);
+            var resultPosition = _gameBoard.Position(0);
 
             Assert.Equal(expected, resultPosition);
         }
@@ -48,14 +53,13 @@ namespace TicTacToe.Test
                 Symbol.Empty, Symbol.Empty, Symbol.Empty
             };
 
-            var gameBoard = new GameBoard();
-            gameBoard.AddSymbol(Symbol.Cross, new Point
+            _gameBoard.AddSymbol(Symbol.Cross, new Point
             {
                 X = 0,
                 Y = 0
             });
 
-            Assert.Equal(expected, gameBoard.Board);
+            Assert.Equal(expected, _gameBoard.Board);
         }
 
         [Fact]
@@ -63,9 +67,8 @@ namespace TicTacToe.Test
         {
             var userInput = 9;
 
-            var gameBoard = new GameBoard();
 
-            Assert.Throws<ArgumentException>(() => gameBoard.Position(userInput));
+            Assert.Throws<ArgumentException>(() => _gameBoard.Position(userInput));
         }
 
         [Fact]
@@ -73,9 +76,8 @@ namespace TicTacToe.Test
         {
             var userInput = -1;
 
-            var gameBoard = new GameBoard();
 
-            Assert.Throws<ArgumentException>(() => gameBoard.Position(userInput));
+            Assert.Throws<ArgumentException>(() => _gameBoard.Position(userInput));
         }
 
         [Fact]
@@ -90,10 +92,9 @@ namespace TicTacToe.Test
                 Symbol.Empty, Symbol.Empty, Symbol.Empty
             };
 
-            var gameBoard = new GameBoard();
-            gameBoard.ShouldMoveHumanPlayer(userInput);
+            _gameBoard.ShouldMoveHumanPlayer(userInput);
 
-            Assert.Equal(expected, gameBoard.Board);
+            Assert.Equal(expected, _gameBoard.Board);
         }
     }
 }

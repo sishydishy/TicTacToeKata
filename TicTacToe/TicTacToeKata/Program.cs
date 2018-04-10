@@ -19,7 +19,7 @@ namespace TicTacToeKata
             
             
             renderer.ShouldRenderStartingBoard(board);
-            Console.WriteLine();
+            
             
 
             
