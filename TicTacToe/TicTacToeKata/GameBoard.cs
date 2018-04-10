@@ -1,6 +1,9 @@
 using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
+using System.Runtime.InteropServices;
+using System.Security.Cryptography.X509Certificates;
 using System.Text;
 
 namespace TicTacToeKata
@@ -13,9 +16,9 @@ namespace TicTacToeKata
         private readonly int _positionOnBoardUpperBound;
         private const int _positionOnBoardLowerBound = 0;
 
-        //private List<Symbol> _board;
+        private List<Symbol> _board;
 
-        public List<Symbol> Board;
+        public IReadOnlyList<Symbol> Board => _board;
 
         public GameBoard()
         {
@@ -28,18 +31,21 @@ namespace TicTacToeKata
 
         private void Create()
         {
-            Board = Enumerable.Repeat((Symbol) '.', _area).ToList();
+            _board = Enumerable.Repeat((Symbol) '.', _area).ToList();
         }
 
-        public Tuple<int, int> Position(int positionOnBoard)
+        public Point Position(int positionOnBoard)
         {
             ValidatePosition(positionOnBoard);
             var x = positionOnBoard % _boardWidth;
             var y = positionOnBoard / _boardWidth;
 
 
-
-            return new Tuple<int, int>(x, y);
+            return new Point
+            {
+                X = x,
+                Y = y
+            };
         }
 
         private void ValidatePosition(int positionOnBoard)
@@ -55,33 +61,22 @@ namespace TicTacToeKata
             return positionOnBoard < _positionOnBoardLowerBound || positionOnBoard > _positionOnBoardUpperBound;
         }
 
-        public void AddSymbol(Symbol symbol, int x, int y)
+        public void AddSymbol(Symbol symbol, Point coordinates)
         {
-            var position = x + _boardHeight * y;
-            Board[position] = symbol;
+            var position = coordinates.X + _boardHeight * coordinates.Y;
+            _board[position] = symbol;
         }
 
 
-
-        public void ShouldRender()
+        public void ShouldMoveHumanPlayer(int userInput)
         {
-            var board = new StringBuilder();
-
-            //board.Append("    |    |    " + Environment.NewLine); //Environment.NewLine allows a new line to be formed cross platform ^.^ very scalable
-            var line_one = " {0}  | {1}  |  {2}  ";
-            board.Append(string.Format(line_one, Position(Convert.ToInt32(Board[0])), (char) Board[1], (char) Board[2]) + Environment.NewLine);
-
-            board.Append("____|____|____" + Environment.NewLine);
-            var line_two = " {0}  | {1}  |  {2}  ";
-            board.Append(string.Format(line_two, (char) Board[3], (char) Board[4], (char) Board[5]) + Environment.NewLine);
-            board.Append("____|____|____" + Environment.NewLine);
-            var line_three = " {0}  | {1}  |  {2}  ";
-            board.Append(string.Format(line_three, (char) Board[6], (char) Board[7], (char) Board[8]) + Environment.NewLine);
-            //board.Append("    |    |    " + Environment.NewLine);
-            Console.WriteLine(board.ToString());
+            var position = Position(userInput);
+            AddSymbol(Symbol.Cross, new Point
+            {
+                X = 0,
+                Y = 0
+            });
             
         }
-
-
-}
+    }
 }
