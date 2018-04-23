@@ -83,8 +83,10 @@ namespace TicTacToe.Test
         [Fact]
         public void AllowHumanPlayerMove()
         {
-            int userInput = 4;
-
+            const int userInput = 0;
+            
+            _gameBoard.ShouldMoveHumanPlayer(userInput);
+            
             var expected = new[]
             {
                 Symbol.Cross, Symbol.Empty, Symbol.Empty,
@@ -92,9 +94,20 @@ namespace TicTacToe.Test
                 Symbol.Empty, Symbol.Empty, Symbol.Empty
             };
 
-            _gameBoard.ShouldMoveHumanPlayer(userInput);
-
             Assert.Equal(expected, _gameBoard.Board);
+        }
+
+
+
+        [Fact]
+        public void RenderStartingCoordinateBoard()
+        {
+            var expected = "(0,0)|(1,0)|(2,0)|";
+            
+            var render = new Renderer();
+            var firstRow = render.DrawRow(_gameBoard);
+            
+            Assert.Equal(expected,firstRow);
         }
     }
 }

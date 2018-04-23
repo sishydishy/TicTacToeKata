@@ -70,12 +70,7 @@ namespace TicTacToeKata
 
         public void ShouldMoveHumanPlayer(int userInput)
         {
-            var position = Position(userInput);
-            AddSymbol(Symbol.Cross, new Point
-            {
-                X = 0,
-                Y = 0
-            });
+            AddSymbol(Symbol.Cross, Position(userInput) );
             
         }
     }
