@@ -80,10 +80,22 @@ namespace TicTacToe.Test
             Assert.Throws<ArgumentException>(() => _gameBoard.Position(userInput));
         }
 
+
+        [Fact]
+        public void GivenUserInputStringThenReturnIndexForBoardList()
+        {
+            string userInput = "0,0";
+
+            var expected = 0;
+
+            var result = _gameBoard.ConvertUserInputToInt(userInput);
+            
+            Assert.Equal(expected,result);
+        }
         [Fact]
         public void AllowHumanPlayerMove()
         {
-            const int userInput = 0;
+            string userInput = "0,0";
             
             _gameBoard.ShouldMoveHumanPlayer(userInput);
             
@@ -119,17 +131,41 @@ namespace TicTacToe.Test
         [Fact]
         public void GivenTokenThenRenderCellWithToken()
         {
-            var expected = ".|";
-            
+            var expected =
+                @"-----|-----|-----
+  .  |  .  |  .  
+-----|-----|-----
+  .  |  .  |  .  
+-----|-----|-----
+  .  |  .  |  .  
+-----|-----|-----
+";
             var render = new Renderer();
-            var result = render.DrawTokenCell(_gameBoard);
+            var result = render.DrawTokenBoard(_gameBoard);
             
             Assert.Equal(expected,result);
-
-
-
         }
         
+        [Fact]
+        public void GivenHumanMoveThenRenderCellWithToken()
+        {
+            var userInput = "0,0";
+            _gameBoard.ShouldMoveHumanPlayer(userInput);
+            var expected =
+                @"-----|-----|-----
+  X  |  .  |  .  
+-----|-----|-----
+  .  |  .  |  .  
+-----|-----|-----
+  .  |  .  |  .  
+-----|-----|-----
+";
+            var render = new Renderer();
+            var result = render.DrawTokenBoard(_gameBoard);
+            
+            Assert.Equal(expected,result);
+        }
+
         
     }
 }

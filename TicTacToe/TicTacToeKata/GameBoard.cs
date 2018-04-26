@@ -68,10 +68,19 @@ namespace TicTacToeKata
         }
 
 
-        public void ShouldMoveHumanPlayer(int userInput)
+        public void ShouldMoveHumanPlayer(string userInput)
         {
-            AddSymbol(Symbol.Cross, Position(userInput) );
             
+            AddSymbol(Symbol.Cross, Position(ConvertUserInputToInt(userInput)));
+            
+        }
+
+        public int ConvertUserInputToInt(string userInput)
+        {
+            var splitInput = userInput.Split(",");
+            
+            return Int32.Parse(splitInput[0]);
+
         }
     }
 }

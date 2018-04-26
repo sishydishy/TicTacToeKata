@@ -36,9 +36,28 @@ namespace TicTacToeKata
             return cell;
         }
 
-        public string DrawTokenCell(GameBoard gameBoard)
+        public string DrawTokenBoard(GameBoard gameBoard)
         {
-            return $"{(char)Symbol.Empty}|";
+            var row = new StringBuilder();
+            row.Append("-----|-----|-----" + Environment.NewLine);
+
+            for (var index = 0; index < gameBoard.Board.Count; index++)
+            {
+                var nextIndex = index + 1;
+                if (nextIndex % gameBoard._boardWidth == 0)
+                {
+                    row.Append("  " + (char) gameBoard.Board[index] + "  " + Environment.NewLine);
+                    row.Append("-----|-----|-----" + Environment.NewLine);
+                }
+                else
+                {
+                    row.Append("  " + (char) gameBoard.Board[index] + "  " + "|");
+                }
+            }
+            return row.ToString();
         }
+
+
+
     }
 }

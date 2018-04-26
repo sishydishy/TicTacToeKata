@@ -19,9 +19,10 @@ namespace TicTacToeKata
 
 
             Console.WriteLine(renderer.DrawStartingBoard(board));
+
+            Console.WriteLine(renderer.DrawTokenBoard(board));
             
-            
-            
+
 
             
 
