@@ -117,12 +117,12 @@ namespace TicTacToe.Test
 
 
         [Fact]
-        public void RenderTokenBoard()
+        public void GivenTokenThenRenderCellWithToken()
         {
             var expected = ".|";
             
             var render = new Renderer();
-            var result = render.DrawTokenBoard(_gameBoard);
+            var result = render.DrawTokenCell(_gameBoard);
             
             Assert.Equal(expected,result);
 

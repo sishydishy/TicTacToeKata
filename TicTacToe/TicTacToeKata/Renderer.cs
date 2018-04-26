@@ -36,7 +36,7 @@ namespace TicTacToeKata
             return cell;
         }
 
-        public string DrawTokenBoard(GameBoard gameBoard)
+        public string DrawTokenCell(GameBoard gameBoard)
         {
             return $"{(char)Symbol.Empty}|";
         }
