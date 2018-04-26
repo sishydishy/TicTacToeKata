@@ -14,11 +14,12 @@ namespace TicTacToeKata
             
             var board = new GameBoard();
             var renderer = new Renderer();
+
+
+
+
+            Console.WriteLine(renderer.DrawStartingBoard(board));
             
-            
-            
-            
-            renderer.ShouldRenderStartingBoard(board);
             
             
 

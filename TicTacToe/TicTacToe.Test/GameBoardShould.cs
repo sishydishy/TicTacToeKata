@@ -96,18 +96,40 @@ namespace TicTacToe.Test
 
             Assert.Equal(expected, _gameBoard.Board);
         }
-
-
-
+        
         [Fact]
         public void RenderStartingCoordinateBoard()
         {
-            var expected = "(0,0)|(1,0)|(2,0)|";
+            var expected = 
+                @"-----|-----|-----
+(0,0)|(1,0)|(2,0)
+-----|-----|-----
+(0,1)|(1,1)|(2,1)
+-----|-----|-----
+(0,2)|(1,2)|(2,2)
+-----|-----|-----
+";   
+            var render = new Renderer();
+            var result = render.DrawStartingBoard(_gameBoard);
+            
+            Assert.Equal(expected,result);
+        }
+
+
+        [Fact]
+        public void RenderTokenBoard()
+        {
+            var expected = ".|";
             
             var render = new Renderer();
-            var firstRow = render.DrawRow(_gameBoard);
+            var result = render.DrawTokenBoard(_gameBoard);
             
-            Assert.Equal(expected,firstRow);
+            Assert.Equal(expected,result);
+
+
+
         }
+        
+        
     }
 }

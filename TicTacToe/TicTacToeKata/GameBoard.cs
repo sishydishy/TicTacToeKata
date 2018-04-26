@@ -11,7 +11,7 @@ namespace TicTacToeKata
     public class GameBoard
     {
         private readonly int _boardHeight;
-        private readonly int _boardWidth;
+        public readonly int _boardWidth;
         private readonly int _area;
         private readonly int _positionOnBoardUpperBound;
         private const int _positionOnBoardLowerBound = 0;
