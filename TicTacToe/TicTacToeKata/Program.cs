@@ -11,6 +11,7 @@ namespace TicTacToeKata
             Console.WriteLine("Welcome to Tic Tac Toe!\n");
             
             Console.WriteLine("Here's the current board:");
+            Console.WriteLine();
             
             var board = new GameBoard();
             var renderer = new Renderer();
@@ -18,8 +19,9 @@ namespace TicTacToeKata
 
 
 
-            Console.WriteLine(renderer.DrawStartingBoard(board));
+            Console.WriteLine(renderer.DrawStartingBoard(board) + Environment.NewLine);
 
+            
             Console.WriteLine(renderer.DrawTokenBoard(board));
             
 

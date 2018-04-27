@@ -78,9 +78,25 @@ namespace TicTacToeKata
         public int ConvertUserInputToInt(string userInput)
         {
             var splitInput = userInput.Split(",");
-            
-            return Int32.Parse(splitInput[0]);
 
+            var coordinateX = Int32.Parse(splitInput[0]);
+            var coordinateY = Int32.Parse(splitInput[1]);
+
+
+            var positionOnBoard = coordinateX + _boardHeight * coordinateY;
+            return positionOnBoard;
+
+        }
+
+        public void CheckInputPositionOnBoard(string userInput)
+        {
+            var position = ConvertUserInputToInt(userInput);
+            if (Board[position] != Symbol.Empty)
+            {
+                throw new ArgumentException("Position is taken by token!");
+            }
+
+            
         }
     }
 }

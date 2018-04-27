@@ -84,9 +84,9 @@ namespace TicTacToe.Test
         [Fact]
         public void GivenUserInputStringThenReturnIndexForBoardList()
         {
-            string userInput = "0,0";
+            string userInput = "0,1";
 
-            var expected = 0;
+            var expected = 3;
 
             var result = _gameBoard.ConvertUserInputToInt(userInput);
             
@@ -161,11 +161,18 @@ namespace TicTacToe.Test
 -----|-----|-----
 ";
             var render = new Renderer();
-            var result = render.DrawTokenBoard(_gameBoard);
             
+            var result = render.DrawTokenBoard(_gameBoard);
             Assert.Equal(expected,result);
         }
 
+        [Fact]
+        public void ThrowArgumentExceptionForPositionTakenByToken()
+        {
+            var userInput = "0,0";
+            
+            Assert.Throws<ArgumentException>(() => _gameBoard.CheckInputPositionOnBoard(userInput));
+        }        
         
     }
 }
