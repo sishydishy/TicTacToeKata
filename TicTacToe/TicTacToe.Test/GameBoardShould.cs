@@ -161,7 +161,6 @@ namespace TicTacToe.Test
 -----|-----|-----
 ";
             var render = new Renderer();
-            
             var result = render.DrawTokenBoard(_gameBoard);
             Assert.Equal(expected,result);
         }
@@ -169,7 +168,10 @@ namespace TicTacToe.Test
         [Fact]
         public void ThrowArgumentExceptionForPositionTakenByToken()
         {
+            var userInput1 = "0,0";
+            _gameBoard.ShouldMoveHumanPlayer(userInput1);
             var userInput = "0,0";
+            _gameBoard.ShouldMoveHumanPlayer(userInput);
             
             Assert.Throws<ArgumentException>(() => _gameBoard.CheckInputPositionOnBoard(userInput));
         }        
