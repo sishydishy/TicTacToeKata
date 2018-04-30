@@ -12,9 +12,9 @@ namespace TicTacToeKata
     {
         private readonly int _boardHeight;
         public readonly int _boardWidth;
-        private readonly int _area;
+      
         private readonly int _positionOnBoardUpperBound;
-        private const int _positionOnBoardLowerBound = 0;
+        private const int POSITION_ON_BOARD_LOWER_BOUND = 0;
 
         private List<Symbol> _board;
 
@@ -24,14 +24,16 @@ namespace TicTacToeKata
         {
             _boardHeight = 3;
             _boardWidth = 3;
-            _area = _boardHeight * _boardWidth;
-            _positionOnBoardUpperBound = _area - 1;
-            Create();
+            var area = _boardHeight * _boardWidth;
+            _positionOnBoardUpperBound = area - 1;
+            
+            Create(area);
         }
 
-        private void Create()
-        {
-            _board = Enumerable.Repeat((Symbol) '.', _area).ToList();
+        private void Create(int area)
+        { 
+            
+            _board = Enumerable.Repeat((Symbol) '.', area).ToList();
         }
 
         public Point Position(int positionOnBoard)
@@ -58,7 +60,7 @@ namespace TicTacToeKata
 
         private bool IsPositionOutOfBounds(int positionOnBoard)
         {
-            return positionOnBoard < _positionOnBoardLowerBound || positionOnBoard > _positionOnBoardUpperBound;
+            return positionOnBoard < POSITION_ON_BOARD_LOWER_BOUND || positionOnBoard > _positionOnBoardUpperBound;
         }
 
         public void AddSymbol(Symbol symbol, Point coordinates)

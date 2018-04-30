@@ -29,7 +29,7 @@ namespace TicTacToe.Test
         }
 
         [Fact]
-        public void ReturnPosiiton()
+        public void ReturnPosition()
         {
             var expected = new Point
             {
