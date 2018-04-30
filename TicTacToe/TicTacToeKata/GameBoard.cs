@@ -72,13 +72,14 @@ namespace TicTacToeKata
 
         public void ShouldMoveHumanPlayer(string userInput)
         {
-            
+            CheckInputPositionOnBoard(userInput);
             AddSymbol(Symbol.Cross, Position(ConvertUserInputToInt(userInput)));
             
         }
 
         public int ConvertUserInputToInt(string userInput)
         {
+            
             var splitInput = userInput.Split(",");
 
             var coordinateX = Int32.Parse(splitInput[0]);

@@ -23,10 +23,21 @@ namespace TicTacToeKata
 
             
             Console.WriteLine(renderer.DrawTokenBoard(board));
+
+            Console.Write("Your Turn (X): ");
+            string userInput1 = Console.ReadLine();
+            board.ShouldMoveHumanPlayer(userInput1);
+            Console.WriteLine(renderer.DrawTokenBoard(board));
             
+            Console.Write("Your Turn (X): ");
+            string userInput = Console.ReadLine();
+            board.ShouldMoveHumanPlayer(userInput);
+            Console.WriteLine(renderer.DrawTokenBoard(board));
 
 
-            
+
+
+
 
 
 
