@@ -63,17 +63,14 @@ namespace TicTacToeKata
             return positionOnBoard < POSITION_ON_BOARD_LOWER_BOUND || positionOnBoard > _positionOnBoardUpperBound;
         }
 
-        public void AddSymbol(Symbol symbol, Point coordinates)
-        {
-            var position = coordinates.X + _boardHeight * coordinates.Y;
-            _board[position] = symbol;
-        }
 
 
-        public void ShouldMoveHumanPlayer(string userInput)
+
+        public void ShouldMoveHumanPlayer(string userInput,Symbol symbol)
         {
             CheckInputPositionOnBoard(userInput);
-            AddSymbol(Symbol.Cross, Position(ConvertUserInputToInt(userInput)));
+            var position = ConvertUserInputToInt(userInput);
+            _board[position] = symbol;
             
         }
 
@@ -102,12 +99,12 @@ namespace TicTacToeKata
             
         }
 
-        public List<int> GetPlayerInputIndexes(char symbol)
+        public List<int> GetPlayerInputIndexes(Symbol symbol)
         {
             var playerInputIndexes = new List<int>();
             for (int index = 0; index < Board.Count; index++)
             {
-                if ((char) Board[index] == symbol)
+                if (Board[index] == symbol)
                 {
                     playerInputIndexes.Add(index);                    
                 }

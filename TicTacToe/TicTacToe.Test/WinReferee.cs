@@ -16,12 +16,12 @@ namespace TicTacToe.Test
         }
          
         
-        public string WinChecker(GameBoard gameBoard, char symbol)
+        public char WinChecker(GameBoard gameBoard, Symbol symbol)
         {
-            var playerIndexesOfBoard = gameBoard.GetPlayerInputIndexes('X');
+            var playerIndexesOfBoard = gameBoard.GetPlayerInputIndexes(symbol);
             var checkWinningConditionsAgainstInput =
                 _listOfWinningConditions.Any(winCondition => !winCondition.Except(playerIndexesOfBoard).Any());
-            return checkWinningConditionsAgainstInput ? symbol.ToString() : "";
+            return checkWinningConditionsAgainstInput ? (char) symbol : ' ';
 
         }
     }

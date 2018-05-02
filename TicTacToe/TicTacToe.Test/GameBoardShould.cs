@@ -43,24 +43,6 @@ namespace TicTacToe.Test
             Assert.Equal(expected, resultPosition);
         }
 
-        [Fact]
-        public void AddSymbol()
-        {
-            var expected = new[]
-            {
-                Symbol.Cross, Symbol.Empty, Symbol.Empty,
-                Symbol.Empty, Symbol.Empty, Symbol.Empty,
-                Symbol.Empty, Symbol.Empty, Symbol.Empty
-            };
-
-            _gameBoard.AddSymbol(Symbol.Cross, new Point
-            {
-                X = 0,
-                Y = 0
-            });
-
-            Assert.Equal(expected, _gameBoard.Board);
-        }
 
         [Fact]
         public void ThrowArgumentExceptionForLargeInputPositions()
@@ -97,7 +79,7 @@ namespace TicTacToe.Test
         {
             string userInput = "0,0";
             
-            _gameBoard.ShouldMoveHumanPlayer(userInput);
+            _gameBoard.ShouldMoveHumanPlayer(userInput, Symbol.Cross);
             
             var expected = new[]
             {
@@ -150,7 +132,7 @@ namespace TicTacToe.Test
         public void GivenHumanMoveThenRenderCellWithToken()
         {
             var userInput = "0,0";
-            _gameBoard.ShouldMoveHumanPlayer(userInput);
+            _gameBoard.ShouldMoveHumanPlayer(userInput, Symbol.Cross);
             var expected =
                 @"-----|-----|-----
   X  |  .  |  .  
@@ -169,9 +151,9 @@ namespace TicTacToe.Test
         public void ThrowArgumentExceptionForPositionTakenByToken()
         {
             var userInput1 = "0,0";
-            _gameBoard.ShouldMoveHumanPlayer(userInput1);
+            _gameBoard.ShouldMoveHumanPlayer(userInput1,Symbol.Nought);
             var userInput = "0,0";
-            _gameBoard.ShouldMoveHumanPlayer(userInput);
+            _gameBoard.ShouldMoveHumanPlayer(userInput,Symbol.Cross);
             
             Assert.Throws<ArgumentException>(() => _gameBoard.CheckInputPositionOnBoard(userInput));
         }
@@ -181,13 +163,13 @@ namespace TicTacToe.Test
         {
             var expected = new List<int>{0,3,6};
             var userInput1 = "0,0";
-            _gameBoard.ShouldMoveHumanPlayer(userInput1);
+            _gameBoard.ShouldMoveHumanPlayer(userInput1,Symbol.Cross);
             var userInput = "0,1";
-            _gameBoard.ShouldMoveHumanPlayer(userInput);
+            _gameBoard.ShouldMoveHumanPlayer(userInput, Symbol.Cross);
             var userInput2 = "0,2";
-            _gameBoard.ShouldMoveHumanPlayer(userInput2);
+            _gameBoard.ShouldMoveHumanPlayer(userInput2, Symbol.Cross);
             
-            var result = _gameBoard.GetPlayerInputIndexes('X');
+            var result = _gameBoard.GetPlayerInputIndexes(Symbol.Cross);
             
             Assert.Equal(expected,result);
         }
@@ -196,15 +178,15 @@ namespace TicTacToe.Test
         public void GivenPlayerXInputWhenWinConditionIsMetThenReturnAsWon()
         {
             var userInput1 = "2,0";
-            _gameBoard.ShouldMoveHumanPlayer(userInput1);
+            _gameBoard.ShouldMoveHumanPlayer(userInput1, Symbol.Nought);
             var userInput = "1,1";
-            _gameBoard.ShouldMoveHumanPlayer(userInput);
+            _gameBoard.ShouldMoveHumanPlayer(userInput, Symbol.Nought);
             var userInput2 = "0,2";
-            _gameBoard.ShouldMoveHumanPlayer(userInput2);
+            _gameBoard.ShouldMoveHumanPlayer(userInput2, Symbol.Nought);
             var winReferee = new WinReferee();
-            var result = winReferee.WinChecker(_gameBoard, 'X');
+            var result = winReferee.WinChecker(_gameBoard, Symbol.Nought);
 
-            Assert.Equal("X", result);
+            Assert.Equal('X', result);
         }
         
     }
