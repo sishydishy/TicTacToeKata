@@ -174,7 +174,24 @@ namespace TicTacToe.Test
             _gameBoard.ShouldMoveHumanPlayer(userInput);
             
             Assert.Throws<ArgumentException>(() => _gameBoard.CheckInputPositionOnBoard(userInput));
-        }        
-        
+        }
+
+        [Fact]
+        public void GivenWinningColoumnConditionReturnWonCondition()
+        {
+            var expected = new List<int>{0,3,6};
+            var userInput1 = "0,0";
+            _gameBoard.ShouldMoveHumanPlayer(userInput1);
+            var userInput = "0,1";
+            _gameBoard.ShouldMoveHumanPlayer(userInput);
+            var userInput2 = "0,2";
+            _gameBoard.ShouldMoveHumanPlayer(userInput2);
+            
+            var result = _gameBoard.GetPlayerInputIndexes('X');
+            
+            Assert.Equal(expected,result);
+            
+            
+        }
     }
 }
