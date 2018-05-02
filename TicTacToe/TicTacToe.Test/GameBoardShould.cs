@@ -190,8 +190,22 @@ namespace TicTacToe.Test
             var result = _gameBoard.GetPlayerInputIndexes('X');
             
             Assert.Equal(expected,result);
-            
-            
         }
+
+        [Fact]
+        public void GivenPlayerXInputWhenWinConditionIsMetThenReturnAsWon()
+        {
+            var userInput1 = "2,0";
+            _gameBoard.ShouldMoveHumanPlayer(userInput1);
+            var userInput = "1,1";
+            _gameBoard.ShouldMoveHumanPlayer(userInput);
+            var userInput2 = "0,2";
+            _gameBoard.ShouldMoveHumanPlayer(userInput2);
+            var winReferee = new WinReferee();
+            var result = winReferee.WinChecker(_gameBoard, 'X');
+
+            Assert.Equal("X", result);
+        }
+        
     }
 }
