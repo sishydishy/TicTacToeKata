@@ -186,7 +186,7 @@ namespace TicTacToe.Test
             var winReferee = new WinReferee();
             var result = winReferee.WinChecker(_gameBoard, Symbol.Nought);
 
-            Assert.Equal('X', result);
+            Assert.Equal('X', (char) result);
         }
         
     }
