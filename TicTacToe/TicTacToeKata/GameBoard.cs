@@ -17,6 +17,7 @@ namespace TicTacToeKata
 
         public IReadOnlyList<Symbol> Board => _board;
 
+
         public GameBoard()
         {
             _boardHeight = 3;

@@ -178,7 +178,7 @@ namespace TicTacToe.Test
         public void GivenPlayerXInputWhenWinConditionIsMetThenReturnAsWon()
         {
             var userInput1 = "2,0";
-            _gameBoard.ShouldMoveHumanPlayer(userInput1, Symbol.Nought);
+            _gameBoard.ShouldMoveHumanPlayer(userInput1, Symbol.Cross);
             var userInput = "1,1";
             _gameBoard.ShouldMoveHumanPlayer(userInput, Symbol.Nought);
             var userInput2 = "0,2";
@@ -188,6 +188,9 @@ namespace TicTacToe.Test
 
             Assert.Equal('X', (char) result);
         }
+        
+        
+
         
     }
 }
