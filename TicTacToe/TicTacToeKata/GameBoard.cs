@@ -13,9 +13,9 @@ namespace TicTacToeKata
         private readonly int _positionOnBoardUpperBound;
         private const int POSITION_ON_BOARD_LOWER_BOUND = 0;
 
-        private List<Symbol> _board;
 
-        public IReadOnlyList<Symbol> Board => _board;
+
+        public List<Symbol> Board; 
 
 
         public GameBoard()
@@ -31,7 +31,7 @@ namespace TicTacToeKata
         private void Create(int area)
         { 
             
-            _board = Enumerable.Repeat((Symbol) '.', area).ToList();
+            Board = Enumerable.Repeat((Symbol) '.', area).ToList();
         }
 
         public Point Position(int positionOnBoard)
@@ -52,7 +52,7 @@ namespace TicTacToeKata
         {
             if (IsPositionOutOfBounds(positionOnBoard))
             {
-                throw new ArgumentException();
+                throw new ArgumentException("Index is out of bounds");
             }
         }
 
@@ -64,11 +64,12 @@ namespace TicTacToeKata
 
 
 
+
         public void ShouldMoveHumanPlayer(string userInput,Symbol symbol)
         {
             CheckInputPositionOnBoard(userInput);
             var position = ConvertUserInputToInt(userInput);
-            _board[position] = symbol;
+            Board[position] = symbol;
             
         }
 
@@ -89,6 +90,7 @@ namespace TicTacToeKata
         public void CheckInputPositionOnBoard(string userInput)
         {
             var position = ConvertUserInputToInt(userInput);
+             ValidatePosition(position);
             if (Board[position] != Symbol.Empty)
             {
                 throw new ArgumentException("Position is taken by token!");

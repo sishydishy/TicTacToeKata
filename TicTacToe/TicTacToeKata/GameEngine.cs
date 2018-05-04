@@ -47,22 +47,23 @@ namespace TicTacToeKata
             while (AnyBoardElementsIsEqualToEmpty(board))
             {
                 PlayerOneMove(board, humanPlayer1Symbol, renderer);
-                winner = winReferee.WinChecker(board, humanPlayer1Symbol);
-                winReferee.AnnounceWinner(winner);
-                if (winner != Symbol.Empty) break;
-                if (BoardElementsNotEqualToEmptyThenBreak(board)) break;
-
-
+                if (CheckIfPlayerIsWinner(board, humanPlayer1Symbol, winReferee, out winner)) break;
                 PlayerTwoMove(board, renderer, humanPlayer2Symbol);
-                winner = winReferee.WinChecker(board, humanPlayer1Symbol);
-                winReferee.AnnounceWinner(winner);
-                if (winner != Symbol.Empty) break;
-                if (BoardElementsNotEqualToEmptyThenBreak(board)) break;
+                if (CheckIfPlayerIsWinner(board, humanPlayer2Symbol, winReferee, out winner)) break;
             }
             return winner;
         }
 
-        
+        private static bool CheckIfPlayerIsWinner(GameBoard board, Symbol symbol, WinReferee winReferee, out Symbol winner)
+        {
+            winner = winReferee.WinChecker(board, symbol);
+            winReferee.AnnounceWinner(winner);
+            if (winner != Symbol.Empty) return true;
+            if (BoardElementsNotEqualToEmptyThenBreak(board)) return true;
+            return false;
+        }
+
+
         private static bool AnyBoardElementsIsEqualToEmpty(GameBoard board)
         {
             return board.Board.Any(x => x == Symbol.Empty);
