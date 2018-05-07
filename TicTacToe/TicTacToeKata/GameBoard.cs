@@ -65,13 +65,7 @@ namespace TicTacToeKata
 
 
 
-        public void ShouldMoveHumanPlayer(string userInput,Symbol symbol)
-        {
-            CheckInputPositionOnBoard(userInput);
-            var position = ConvertUserInputToInt(userInput);
-            Board[position] = symbol;
-            
-        }
+
 
         public int ConvertUserInputToInt(string userInput)
         {
