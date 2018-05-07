@@ -8,17 +8,19 @@ namespace TicTacToeKata
     public class WinReferee
     {
         private readonly List<List<int>> _listOfWinningConditions;
-        
+        private readonly BoardSolver _boardSolver;
+
         public WinReferee()
         {
             _listOfWinningConditions = new WinnerConditions().ListOfWinnerConditions;
+            _boardSolver = new BoardSolver();
             
         }
          
         
         public Symbol WinChecker(GameBoard gameBoard, Symbol symbol)
         {
-            var playerIndexesOfBoard = gameBoard.GetPlayerInputIndexes(symbol);
+            var playerIndexesOfBoard = _boardSolver.GetPlayerInputIndexes(gameBoard,symbol);
             var checkWinningConditionsAgainstInput =
                 _listOfWinningConditions.Any(winCondition => !winCondition.Except(playerIndexesOfBoard).Any());
             return checkWinningConditionsAgainstInput ? symbol : Symbol.Empty;

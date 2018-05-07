@@ -8,12 +8,15 @@ namespace TicTacToe.Test
     {
         private readonly GameBoard _gameBoard;
         private readonly HumanPlayer _humanPlayer;
+        private readonly BoardSolver _boardSolver;
 
         public BoardSolverShould()
         {
             _gameBoard = new GameBoard();
             _humanPlayer = new HumanPlayer(Symbol.Cross, new InputChecker());
+            _boardSolver = new BoardSolver();
         }
+        
         
         [Fact]
         public void GivenWinningColoumnConditionReturnWonCondition()
@@ -26,9 +29,11 @@ namespace TicTacToe.Test
             var userInput2 = "0,2";
             _humanPlayer.ShouldMoveHumanPlayer(_gameBoard,userInput2);
             
-            var result = _gameBoard.GetPlayerInputIndexes(Symbol.Cross);
+            
+            var result = _boardSolver.GetPlayerInputIndexes(_gameBoard,Symbol.Cross);
             
             Assert.Equal(expected,result);
         }
+
     }
 }

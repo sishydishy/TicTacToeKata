@@ -49,19 +49,5 @@ namespace TicTacToeKata
         }
 
 
-        public List<int> GetPlayerInputIndexes(Symbol symbol)
-        {
-            var playerInputIndexes = new List<int>();
-            for (int index = 0; index < Board.Count; index++)
-            {
-                if (Board[index] == symbol)
-                {
-                    playerInputIndexes.Add(index);                    
-                }
-                
-            }
-
-            return playerInputIndexes;
-        }
     }
 }
