@@ -6,12 +6,12 @@ namespace TicTacToe.Test
     public class RendererShould
     {
         private readonly GameBoard _gameBoard;
-        private  HumanPlayer _humanPlayer;
+        private readonly HumanPlayer _humanPlayer;
 
         public RendererShould()
         {
             _gameBoard = new GameBoard();
-            _humanPlayer = new HumanPlayer();
+            _humanPlayer = new HumanPlayer(Symbol.Cross);
         }
         
         [Fact]
@@ -54,15 +54,15 @@ namespace TicTacToe.Test
         [Fact]
         public void GivenHumanMoveThenRenderCellWithToken()
         {
-            var userInput = "0,0";
-            _gameBoard.ShouldMoveHumanPlayer(userInput, Symbol.Cross);
+            var userInput = "0,2";
+            _humanPlayer.ShouldMoveHumanPlayer(_gameBoard, userInput);
             var expected =
                 @"-----|-----|-----
+  .  |  .  |  .  
+-----|-----|-----
+  .  |  .  |  .  
+-----|-----|-----
   X  |  .  |  .  
------|-----|-----
-  .  |  .  |  .  
------|-----|-----
-  .  |  .  |  .  
 -----|-----|-----
 ";
             var render = new Renderer();

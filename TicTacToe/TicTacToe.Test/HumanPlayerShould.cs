@@ -12,7 +12,7 @@ namespace TicTacToe.Test
         public HumanPlayerShould()
         {
             _gameBoard = new GameBoard();
-            _humanPlayer = new HumanPlayer();
+            _humanPlayer = new HumanPlayer(Symbol.Cross);
         }
         
         
@@ -22,7 +22,7 @@ namespace TicTacToe.Test
         {
             string userInput = "0,0";
             
-            _humanPlayer.ShouldMoveHumanPlayer(userInput, Symbol.Cross);
+            _humanPlayer.ShouldMoveHumanPlayer(_gameBoard, userInput);
 
             var expected = _gameBoard.Board = new List<Symbol>
             {
