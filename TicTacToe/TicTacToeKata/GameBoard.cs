@@ -36,7 +36,7 @@ namespace TicTacToeKata
 
         public Point Position(int positionOnBoard)
         {
-            ValidatePosition(positionOnBoard);
+            
             var x = positionOnBoard % _boardWidth;
             var y = positionOnBoard / _boardWidth;
 
@@ -48,50 +48,6 @@ namespace TicTacToeKata
             };
         }
 
-        private void ValidatePosition(int positionOnBoard)
-        {
-            if (IsPositionOutOfBounds(positionOnBoard))
-            {
-                throw new ArgumentException("Index is out of bounds");
-            }
-        }
-
-        private bool IsPositionOutOfBounds(int positionOnBoard)
-        {
-            return positionOnBoard < _positionOnBoardLowerBound || positionOnBoard > _positionOnBoardUpperBound;
-        }
-
-
-
-
-
-
-
-        public int ConvertUserInputToInt(string userInput)
-        {
-            
-            var splitInput = userInput.Split(",");
-
-            var coordinateX = Int32.Parse(splitInput[0]);
-            var coordinateY = Int32.Parse(splitInput[1]);
-
-
-            var positionOnBoard = coordinateX + _boardHeight * coordinateY;
-            return positionOnBoard;
-
-        }
-
-        public void CheckInputPositionOnBoard(string userInput)
-        {
-            var position = ConvertUserInputToInt(userInput);
-             ValidatePosition(position);
-            if (Board[position] != Symbol.Empty)
-            {
-                throw new ArgumentException("Position is taken by token!");
-            }
-
-            
-        }
 
         public List<int> GetPlayerInputIndexes(Symbol symbol)
         {
