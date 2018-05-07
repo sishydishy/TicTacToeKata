@@ -8,6 +8,7 @@ namespace TicTacToeKata
 {
     public class Renderer
     {
+
         public string DrawStartingBoard(GameBoard gameBoard)
         {
             var row = new StringBuilder();

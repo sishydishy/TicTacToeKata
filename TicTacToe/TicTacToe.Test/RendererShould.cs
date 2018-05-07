@@ -6,10 +6,12 @@ namespace TicTacToe.Test
     public class RendererShould
     {
         private readonly GameBoard _gameBoard;
+        private  HumanPlayer _humanPlayer;
 
         public RendererShould()
         {
             _gameBoard = new GameBoard();
+            _humanPlayer = new HumanPlayer();
         }
         
         [Fact]

@@ -7,11 +7,11 @@ namespace TicTacToeKata
 {
     public class GameBoard
     {
-        private readonly int _boardHeight;
+        public readonly int _boardHeight;
         public readonly int _boardWidth;
       
-        private readonly int _positionOnBoardUpperBound;
-        private const int POSITION_ON_BOARD_LOWER_BOUND = 0;
+        public readonly int _positionOnBoardUpperBound;
+        public readonly int _positionOnBoardLowerBound = 0;
 
 
 
@@ -58,7 +58,7 @@ namespace TicTacToeKata
 
         private bool IsPositionOutOfBounds(int positionOnBoard)
         {
-            return positionOnBoard < POSITION_ON_BOARD_LOWER_BOUND || positionOnBoard > _positionOnBoardUpperBound;
+            return positionOnBoard < _positionOnBoardLowerBound || positionOnBoard > _positionOnBoardUpperBound;
         }
 
 
