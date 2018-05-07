@@ -7,10 +7,14 @@ namespace TicTacToe.Test
     public class InputCheckerShould
     {
         private readonly GameBoard _gameBoard;
+        private readonly HumanPlayer _humanPlayerOne;
+        private readonly HumanPlayer _humanPlayerTwo;
 
         public InputCheckerShould()
         {
             _gameBoard = new GameBoard();
+            _humanPlayerOne = new HumanPlayer(Symbol.Nought);
+            _humanPlayerTwo = new HumanPlayer(Symbol.Cross);
         }
 
         [Fact]
@@ -47,9 +51,9 @@ namespace TicTacToe.Test
         public void ThrowArgumentExceptionForPositionTakenByToken()
         {
             var userInput1 = "0,0";
-            _gameBoard.ShouldMoveHumanPlayer(userInput1,Symbol.Nought);
+            _humanPlayerOne.ShouldMoveHumanPlayer(_gameBoard,userInput1);
             var userInput = "0,1";
-            _gameBoard.ShouldMoveHumanPlayer(userInput,Symbol.Cross);
+            _humanPlayerTwo.ShouldMoveHumanPlayer(_gameBoard,userInput);
             
             Assert.Throws<ArgumentException>(() => _gameBoard.CheckInputPositionOnBoard(userInput1));
         }
