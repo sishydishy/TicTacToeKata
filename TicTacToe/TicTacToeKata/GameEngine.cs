@@ -107,8 +107,8 @@ namespace TicTacToeKata
         {
             renderer = new Renderer();
             winReferee = new WinReferee();
-            humanPlayerOne = new HumanPlayer(humanPlayer1Symbol);
-            humanPlayerTwo = new HumanPlayer(humanPlayer2Symbol);
+            humanPlayerOne = new HumanPlayer(humanPlayer1Symbol, new InputChecker());
+            humanPlayerTwo = new HumanPlayer(humanPlayer2Symbol, new InputChecker());
         }
 
         

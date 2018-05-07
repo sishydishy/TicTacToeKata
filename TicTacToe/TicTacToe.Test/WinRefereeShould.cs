@@ -12,8 +12,8 @@ namespace TicTacToe.Test
         public WinRefereeShould()
         {
             _gameBoard = new GameBoard();
-            _humanPlayerOne = new HumanPlayer(Symbol.Nought);
-            _humanPlayerTwo = new HumanPlayer(Symbol.Cross);
+            _humanPlayerOne = new HumanPlayer(Symbol.Nought, new InputChecker());
+            _humanPlayerTwo = new HumanPlayer(Symbol.Cross, new InputChecker());
         }
         
         [Fact]

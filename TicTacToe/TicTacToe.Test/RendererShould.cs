@@ -11,7 +11,7 @@ namespace TicTacToe.Test
         public RendererShould()
         {
             _gameBoard = new GameBoard();
-            _humanPlayer = new HumanPlayer(Symbol.Cross);
+            _humanPlayer = new HumanPlayer(Symbol.Cross, new InputChecker());
         }
         
         [Fact]

@@ -2,17 +2,11 @@
 
 namespace TicTacToeKata
 {
-    public class InputChecker
+    public class InputChecker : IInputChecker
     {
-        private readonly GameBoard _gameBoard;
-
-        public InputChecker()
-        {
-            _gameBoard = new GameBoard();
-        }
 
 
-        private int ConvertUserInputToInt(string userInput)
+        public int ConvertUserInputToInt(GameBoard gameBoard, string userInput)
         {
             
             var splitInput = userInput.Split(",");
@@ -21,34 +15,44 @@ namespace TicTacToeKata
             var coordinateY = int.Parse(splitInput[1]);
 
 
-            var positionOnBoard = coordinateX + _gameBoard._boardHeight * coordinateY;
+            var positionOnBoard = coordinateX + gameBoard._boardHeight * coordinateY;
             return positionOnBoard;
 
         }
 
-        public void ValidateInputPositionOnBoard(string userInput)
+        public void ValidateInputPositionOnBoard(string userInput, GameBoard gameBoard)
         {
-            var position = ConvertUserInputToInt(userInput);
-            ValidatePosition(position);
-            if (_gameBoard.Board[position] != Symbol.Empty)
+            var position = ConvertUserInputToInt(gameBoard,userInput);
+            ValidatePosition(position, gameBoard);
+            
+            
+        }
+
+        private bool IsTokenAtPositionOnBoardNotEmpty(GameBoard gameBoard,int position)
+        {
+            return gameBoard.Board[position] != Symbol.Empty;
+        }
+
+        private void ValidatePosition(int positionOnBoard, GameBoard gameBoard)
+        {
+            if (IsPositionOutOfBounds(positionOnBoard, gameBoard))
+            {
+                throw new ArgumentException("Index is out of bounds");
+            }
+            
+            if (IsTokenAtPositionOnBoardNotEmpty(gameBoard,positionOnBoard))
             {
                 throw new ArgumentException("Position is taken by token!");
             }
 
-            
-        }
-        private void ValidatePosition(int positionOnBoard)
-        {
-            if (IsPositionOutOfBounds(positionOnBoard))
-            {
-                throw new ArgumentException("Index is out of bounds");
-            }
         }
 
-        private bool IsPositionOutOfBounds(int positionOnBoard)
+        private bool IsPositionOutOfBounds(int positionOnBoard, GameBoard gameBoard)
         {
-            return positionOnBoard < _gameBoard._positionOnBoardLowerBound || positionOnBoard > _gameBoard._positionOnBoardUpperBound;
+            return positionOnBoard < gameBoard._positionOnBoardLowerBound || positionOnBoard > gameBoard._positionOnBoardUpperBound;
         }
+        
+        
 
     }
 }
