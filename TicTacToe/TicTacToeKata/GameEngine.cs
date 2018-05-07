@@ -13,9 +13,9 @@ namespace TicTacToeKata
         private static void Execute()
         {
             BoardSetUp(out var board, out var humanPlayer1Symbol, out var humanPlayer2Symbol);
-            EngineSetUp(out var renderer, out var winReferee);
+            EngineSetUp(out var renderer, out var winReferee, humanPlayer1Symbol, humanPlayer2Symbol, out var humanPlayerOne, out var humanPlayerTwo);
             InitialWelcomeAndBoard(renderer, board);
-            var winner = PlayTicTacToe(board, humanPlayer1Symbol, renderer, winReferee, humanPlayer2Symbol);
+            var winner = PlayTicTacToe(board, humanPlayer1Symbol, renderer, winReferee, humanPlayer2Symbol, humanPlayerOne, humanPlayerTwo);
             winReferee.AnnounceDraw(winner, board.Board);
             ReplayGame();
         }
@@ -41,14 +41,14 @@ namespace TicTacToeKata
         
         private static Symbol PlayTicTacToe(GameBoard board, Symbol humanPlayer1Symbol, Renderer renderer,
             WinReferee winReferee,
-            Symbol humanPlayer2Symbol)
+            Symbol humanPlayer2Symbol, HumanPlayer humanPlayerOne, HumanPlayer humanPlayerTwo)
         {
             var winner = Symbol.Empty;
             while (AnyBoardElementsIsEqualToEmpty(board))
             {
-                PlayerOneMove(board, humanPlayer1Symbol, renderer);
+                PlayerOneMove(board, renderer, humanPlayerOne);
                 if (CheckIfPlayerIsWinner(board, humanPlayer1Symbol, winReferee, out winner)) break;
-                PlayerTwoMove(board, renderer, humanPlayer2Symbol);
+                PlayerTwoMove(board, renderer, humanPlayerTwo);
                 if (CheckIfPlayerIsWinner(board, humanPlayer2Symbol, winReferee, out winner)) break;
             }
             return winner;
@@ -76,20 +76,20 @@ namespace TicTacToeKata
         }
 
         
-        private static void PlayerTwoMove(GameBoard board, Renderer renderer, Symbol humanPlayer2Symbol)
+        private static void PlayerTwoMove(GameBoard board, Renderer renderer, HumanPlayer humanPlayerTwo)
         {
             Console.Write("Your Turn: ");
             var playerTwoInput = Console.ReadLine();
-            board.ShouldMoveHumanPlayer(playerTwoInput, humanPlayer2Symbol);
+            humanPlayerTwo.ShouldMoveHumanPlayer(board, playerTwoInput);
             Console.WriteLine(renderer.DrawTokenBoard(board));
         }
 
         
-        private static void PlayerOneMove(GameBoard board, Symbol humanPlayer1Symbol, Renderer renderer)
+        private static void PlayerOneMove(GameBoard board, Renderer renderer, HumanPlayer humanPlayerOne)
         {
             Console.Write("Your Turn: ");
             var playerOneInput = Console.ReadLine();
-            board.ShouldMoveHumanPlayer(playerOneInput, humanPlayer1Symbol);
+            humanPlayerOne.ShouldMoveHumanPlayer(board, playerOneInput);
             Console.WriteLine(renderer.DrawTokenBoard(board));
         }
 
@@ -103,10 +103,12 @@ namespace TicTacToeKata
         }
 
         
-        private static void EngineSetUp(out Renderer renderer, out WinReferee winReferee)
+        private static void EngineSetUp(out Renderer renderer, out WinReferee winReferee, Symbol humanPlayer1Symbol, Symbol humanPlayer2Symbol, out HumanPlayer humanPlayerOne, out HumanPlayer humanPlayerTwo)
         {
             renderer = new Renderer();
             winReferee = new WinReferee();
+            humanPlayerOne = new HumanPlayer(humanPlayer1Symbol);
+            humanPlayerTwo = new HumanPlayer(humanPlayer2Symbol);
         }
 
         
